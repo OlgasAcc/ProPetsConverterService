@@ -11,7 +11,6 @@ import com.google.maps.GeocodingApiRequest;
 import com.google.maps.model.GeocodingResult;
 
 import proPets.converter.configuration.ConverterConfiguration;
-import proPets.converter.model.GeoPoint;
 
 @Service
 public class GeoLocationServiceImpl implements GeoLocationService {
@@ -40,15 +39,6 @@ public class GeoLocationServiceImpl implements GeoLocationService {
 	@Override
 	public String formateAddressForGeoRequest(String address) {
 		return address.replace(" ", "+");
-	}
-
-	@Override
-	public GeoPoint getGeoPointByAddress(String address) throws URISyntaxException {
-		GeoPoint location = new GeoPoint();
-		Double[] coordinates = getLocationByAddress(address);
-		location.setLatitude(coordinates[0]);
-		location.setLongitude(coordinates[1]);
-		return location;
 	}
 
 }

@@ -5,7 +5,6 @@ import java.util.Set;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import proPets.converter.model.GeoPoint;
 
 @Getter
 @Setter
@@ -14,10 +13,11 @@ import proPets.converter.model.GeoPoint;
 public class ConvertedPost { 
 	
 	String id;
+	String email; //authorId
 	String flag;
 	String type;
 	String distFeatures;
 	Set<String> picturesTags;
-	GeoPoint location;
+	Double[] location;
 
 }

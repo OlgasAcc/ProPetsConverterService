@@ -25,10 +25,11 @@ public class ConverterServiceImpl implements ConverterService {
 	public ConvertedPost convertToConvertedPost(PostRequestDto postReqDto) throws URISyntaxException {
 		return ConvertedPost.builder()
 				.flag(postReqDto.getFlag())
+				.email(postReqDto.getEmail())
 				.type(postReqDto.getType())
 				.distFeatures(postReqDto.getDistinctiveFeatures())
 				.picturesTags(tagService.createSetOfPicturesTags(postReqDto.getPicturesURLs())) 
-				.location(geoLocationService.getGeoPointByAddress(postReqDto.getAddress()))
+				.location(geoLocationService.getLocationByAddress(postReqDto.getAddress()))
 				.build(); 
 	}
 
