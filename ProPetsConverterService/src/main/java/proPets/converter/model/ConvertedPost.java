@@ -13,7 +13,7 @@ import lombok.Setter;
 public class ConvertedPost { 
 	
 	String id;
-	String email; //authorId
+	String email; //authorId (for sending notifications)
 	String flag;
 	String type;
 	String distFeatures;
