@@ -34,7 +34,7 @@ public class ConverterServiceController {
 		return ResponseEntity.ok().headers(newHeaders).body(body);
 	}
 	
-	@GetMapping ("/location")
+	@PutMapping ("/location")
 	public ResponseEntity<ConvertedLocationData> getLocationData(@RequestParam ("address") String address) throws Exception {
 		HttpHeaders newHeaders = new HttpHeaders();
 		newHeaders.add("Content-Type", "application/json");

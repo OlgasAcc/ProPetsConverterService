@@ -26,8 +26,8 @@ public class ConverterServiceImpl implements ConverterService {
 
 	@Override
 	public ConvertedPostDto convertToConvertedPost(PostRequestDto postReqDto) throws URISyntaxException {
-		   Set<String> set = tagService.createSetOfPicturesTags(postReqDto.getPicturesURLs());
-		String[] arr = set.stream().toArray(String[] ::new); 
+		Set<String> set = tagService.createSetOfPicturesTags(postReqDto.getPicturesURLs());
+		String[] arr = set.stream().toArray(String[]::new);
 		   
 		return ConvertedPostDto.builder()
 				.id(postReqDto.getId())

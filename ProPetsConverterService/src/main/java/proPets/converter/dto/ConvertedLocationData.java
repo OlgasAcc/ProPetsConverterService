@@ -9,5 +9,5 @@ import lombok.Setter;
 @Setter
 
 public class ConvertedLocationData {
- Double[]location;
+	Double[] location;
 }
