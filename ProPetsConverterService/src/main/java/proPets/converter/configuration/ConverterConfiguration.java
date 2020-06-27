@@ -9,13 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.web.client.RestTemplate;
 
-import proPets.converter.model.ConvertedPost;
+import proPets.converter.dto.ConvertedPostDto;
 
 @Configuration
 @ManagedResource
 public class ConverterConfiguration {
 
-	Map<String, ConvertedPost> posts = new ConcurrentHashMap<>();
+	Map<String, ConvertedPostDto> posts = new ConcurrentHashMap<>();
 	
 	@Bean
 	public RestTemplate restTemplate() {

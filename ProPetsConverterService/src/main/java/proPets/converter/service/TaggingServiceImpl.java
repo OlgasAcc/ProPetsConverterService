@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -32,10 +33,9 @@ public class TaggingServiceImpl implements TaggingService {
 		for (int i = 0; i < picturesUrls.length; i++) {
 			List<TagDto> tagsAndConfidence = new ArrayList<>();
 			tagsAndConfidence.addAll(getPictureTags(picturesUrls[i]).getTags());
-			System.out.println(tagsAndConfidence.toString() + " size: " + tagsAndConfidence.size());
 			tagsAndConfidence.stream()
 							.map(obj -> allTags.add(obj.getTag().get("en")))
-							.close();
+							.collect(Collectors.toList());
 		}
 		return allTags;
 	}
