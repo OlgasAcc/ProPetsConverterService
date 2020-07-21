@@ -26,7 +26,6 @@ public class TaggingServiceImpl implements TaggingService {
 	@Autowired
 	ConverterConfiguration converterConfiguration;
 
-	
 	@Override
 	public Set<String> createSetOfPicturesTags(String[] picturesUrls) {
 		Set<String> allTags = new HashSet<>();
@@ -44,8 +43,8 @@ public class TaggingServiceImpl implements TaggingService {
 		RestTemplate restTemplate = converterConfiguration.restTemplate();
 	
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization", "Basic YWNjXzc5MDBkNDQ3YmUzYTM1Njo2Y2ZkYzFmMmRkY2Y5ZTIxODY3YzFjNGY2ZmVmOGNjYg==");
-		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(converterConfiguration.getUrl())
+		headers.add("Authorization", converterConfiguration.getAuthCode());
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(converterConfiguration.getImaggaUrl())
 				.queryParam("image_url",url)
 				.queryParam("language", "en")
 				.queryParam("limit", 10);
@@ -65,6 +64,5 @@ public class TaggingServiceImpl implements TaggingService {
 			distinctiveFeatures.add(features[i].trim());
 		}
 		return distinctiveFeatures;
-	}
-		
+	}		
 }

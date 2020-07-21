@@ -26,7 +26,7 @@ public class ConverterConfiguration {
 	String url;
 	
 	@RefreshScope
-	public String getUrl() {
+	public String getImaggaUrl() {
 		return url;
 	}
 	
@@ -44,5 +44,13 @@ public class ConverterConfiguration {
 	@RefreshScope
 	public String getGeoKey() {
 		return geoKey;
+	}
+	
+	@Value("${BASIC.auth.code}")
+	String authCode;
+	
+	@RefreshScope
+	public String getAuthCode() {
+		return authCode;
 	}
 }

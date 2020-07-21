@@ -32,22 +32,23 @@ public class ConverterServiceController {
 
 	@RefreshScope
 	@GetMapping("/config")
-	public  BeanConfiguration getRefreshedData() {
-		return new BeanConfiguration(converterConfiguration.getGeoKey(),converterConfiguration.getGeoUrl(),converterConfiguration.getUrl());
+	public BeanConfiguration getRefreshedData() {
+		return new BeanConfiguration(converterConfiguration.getGeoKey(), converterConfiguration.getGeoUrl(),
+				converterConfiguration.getImaggaUrl(), converterConfiguration.getAuthCode());
 	}
-	
-	@PutMapping ("/post")
+
+	@PutMapping("/post")
 	public ResponseEntity<ConvertedPostDto> convertPost(@RequestBody PostRequestDto postRequestDto) throws Exception {
-		System.out.println("im in converter service");
 		HttpHeaders newHeaders = new HttpHeaders();
 		newHeaders.add("Content-Type", "application/json");
 		ConvertedPostDto body = converterService.convertToConvertedPost(postRequestDto);
 		System.out.println(body.getId());
 		return ResponseEntity.ok().headers(newHeaders).body(body);
 	}
-	
-	@PutMapping ("/location")
-	public ResponseEntity<ConvertedLocationData> getLocationData(@RequestParam ("address") String address) throws Exception {
+
+	@PutMapping("/location")
+	public ResponseEntity<ConvertedLocationData> getLocationData(@RequestParam("address") String address)
+			throws Exception {
 		HttpHeaders newHeaders = new HttpHeaders();
 		newHeaders.add("Content-Type", "application/json");
 		ConvertedLocationData body = converterService.getLocationData(address);
