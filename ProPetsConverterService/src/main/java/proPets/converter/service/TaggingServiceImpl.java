@@ -32,22 +32,18 @@ public class TaggingServiceImpl implements TaggingService {
 		for (int i = 0; i < picturesUrls.length; i++) {
 			List<TagDto> tagsAndConfidence = new ArrayList<>();
 			tagsAndConfidence.addAll(getPictureTags(picturesUrls[i]).getTags());
-			tagsAndConfidence.stream()
-							.map(obj -> allTags.add(obj.getTag().get("en")))
-							.collect(Collectors.toList());
+			tagsAndConfidence.stream().map(obj -> allTags.add(obj.getTag().get("en"))).collect(Collectors.toList());
 		}
 		return allTags;
 	}
-	
+
 	private TagResultDto getPictureTags(String url) {
 		RestTemplate restTemplate = converterConfiguration.restTemplate();
-	
+		String auth = converterConfiguration.getAuthCode();
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization", converterConfiguration.getAuthCode());
+		headers.add("Authorization", auth);
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(converterConfiguration.getImaggaUrl())
-				.queryParam("image_url",url)
-				.queryParam("language", "en")
-				.queryParam("limit", 10);
+				.queryParam("image_url", url).queryParam("language", "en").queryParam("limit", 10);
 		RequestEntity<String> request = new RequestEntity<String>(headers, HttpMethod.GET, builder.build().toUri());
 
 		ResponseEntity<TagResponseDto> response = restTemplate.exchange(request, TagResponseDto.class);
@@ -55,7 +51,7 @@ public class TaggingServiceImpl implements TaggingService {
 	}
 
 	// скорее всего не понадобится: Эластик ищет обычный целый стринг
-	
+
 	@Override
 	public Set<String> getDistinctiveFeaturesTags(String newFeatures) {
 		Set<String> distinctiveFeatures = new HashSet<>();
@@ -64,5 +60,5 @@ public class TaggingServiceImpl implements TaggingService {
 			distinctiveFeatures.add(features[i].trim());
 		}
 		return distinctiveFeatures;
-	}		
+	}
 }
